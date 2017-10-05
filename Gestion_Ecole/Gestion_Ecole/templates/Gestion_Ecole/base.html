@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		HSM - {% block title %}{% endblock %}
+	</title>
+	<html xmlns="http ://www.w3.org/1999/xhtml" lang="fr">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{% load static %}
+	<link href="{% static "Gestion_Ecole/css/bootstrap.min.css" %}" rel="stylesheet">
+	<link href="{% static "Gestion_Ecole/css/style.css" %}" rel="stylesheet">
+	<link type="text/css" href="/static/css/login.css" rel="stylesheet">
+	<script src="{% static "Gestion_Ecole/js/jquery-3.2.1.min.js" %}"></script>
+	<script src="{% static "Gestion_Ecole/js/bootstrap.min.js" %}"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="application/x-javascript">
+		addEventListener("load", function() {
+			setTimeout(hideURLbar, 0);
+		}, false);
+		function hideURLbar(){
+			window.scrollTo(0,1);
+		}
+	</script>
+</head>
+<body>
+	{% block top %} {% endblock %}
+	<div class="jumbotron text-center">
+		<h1>High School Manager</h1>
+		{% block subtitle %}
+			<p>Gestion de votre école primaire</p>
+		{% endblock %}
+	</div>
+	{% block content %} {% endblock %}
+</body>
+</html>

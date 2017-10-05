@@ -1,0 +1,27 @@
+<<<<<<< HEAD
+{% extends "Gestion_Ecole/base_logged_in.html" %}
+
+{% block title %} {{ classe_choisie }} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <strong><h2>{{ classe_choisie }}</h2></strong>
+  {% for matiere in liste_matieres %}
+  <button type="button" class="btn btn-default btn-block">
+    {{ matiere }}
+  </button>
+  {% endfor %}
+</div>
+=======
+{% extends "Gestion_Ecole/base_logged_in" %}
+
+{% block content %}
+<ul>
+{% for matiere in matieres %}
+  <li>{{ matiere }}</li>  
+{% endfor %}
+</ul>
+
+>>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
+{% endblock %}

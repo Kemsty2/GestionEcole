@@ -1,0 +1,41 @@
+{% extends "Gestion_Ecole/base.html" %}
+
+{% load bootstrap3 %}
+{% bootstrap_messages %}
+{% block title %}
+  Connexion
+{% endblock %}
+{% block content %}
+	<div class="container col-sm-4 col-sm-offset-4" id="loginContainer">
+	  {% if error %}
+	  <div class="alert alert-danger alert-dismissable">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	    {{error}}
+	  </div>
+	  {% endif %}
+		<form action="login" method="post" class="form">
+		  {% csrf_token %}
+		  {% bootstrap_form form %}
+		  {% buttons %}
+		    <button type="submit" class="btn btn-primary">
+<<<<<<< HEAD
+		      <span class="glyphicon glyphicon-ok"></span> Valider
+=======
+		      <span class="glyphicon glyphicon-ok"></span> Submit
+>>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
+		    </button>
+		  {% endbuttons %}
+		</form>
+	</div>
+
+	<script type="text/javascript">
+	  function toggle(){
+	    if(document.getElementById("password").type == 'text'){
+	      document.getElementById("password").type = 'password';
+	    } else {
+	      document.getElementById("password").type = 'text';
+	    }
+	    document.getElementById("showHidePass").classList.toggle('glyphicon-eye-close');
+	  }
+	</script>
+{% endblock %}
