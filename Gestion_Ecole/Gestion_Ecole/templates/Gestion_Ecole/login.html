@@ -2,9 +2,9 @@
 
 {% load bootstrap3 %}
 {% bootstrap_messages %}
-{% block title %}
-  Connexion
-{% endblock %}
+
+{% block titlepage %}Connexion{% endblock %}
+
 {% block content %}
 	<div class="container col-sm-4 col-sm-offset-4" id="loginContainer">
 	  {% if error %}
@@ -13,16 +13,12 @@
 	    {{error}}
 	  </div>
 	  {% endif %}
-		<form action="login" method="post" class="form">
+		<form action="/login/" method="post" class="form">
 		  {% csrf_token %}
 		  {% bootstrap_form form %}
 		  {% buttons %}
 		    <button type="submit" class="btn btn-primary">
-<<<<<<< HEAD
 		      <span class="glyphicon glyphicon-ok"></span> Valider
-=======
-		      <span class="glyphicon glyphicon-ok"></span> Submit
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
 		    </button>
 		  {% endbuttons %}
 		</form>

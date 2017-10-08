@@ -7,6 +7,7 @@ from django.db import models
 from datetime import datetime
 from django.db.models.fields.related import ManyToManyField
 from django.db.models.fields import DateTimeField
+from django.core.urlresolvers import reverse
 
 class Personne(models.Model):
     Nom = models.CharField(max_length = 50)
@@ -18,7 +19,6 @@ class Personne(models.Model):
         )
     Sexe = models.CharField(max_length = 10, choices = SEXE_CHOICE)
     Email = models.EmailField()
-<<<<<<< HEAD
     def __str__(self):
         return self.Email
 #    class Meta:
@@ -26,26 +26,14 @@ class Personne(models.Model):
 
 class Classe(models.Model):
     Nom = models.CharField(max_length = 50)
-=======
-
-    def __str__(self):
-        return self.Email
-
-class Classe(models.Model):
-    Nom = models.CharField(max_length = 50)
-
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
     def __str__(self):
         return self.Nom
+    def get_absolute_url(self):
+        return "/classe/%i/" % self.id
 
 class Trimestre(models.Model):
     Nom = models.CharField(max_length = 50)
-<<<<<<< HEAD
     Date = models.DateField(auto_now = True, auto_now_add = False)
-=======
-    Date = models.DateField(auto_now = True,auto_now_add = False)
-
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
     def __str__(self):
         return self.Nom
 
@@ -58,10 +46,6 @@ class Directeur(Personne):
 class Maitre(Personne):
     type_personne = 'maitre'
     Age = models.IntegerField()
-<<<<<<< HEAD
-=======
-    #Photo = models.ImageField(upload_to = 'Images/', default = 'Images/no-img.jpg')
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
     Numero_Telephone = models.CharField(max_length = 20)
     Classes = ManyToManyField(Classe)
     Actif = models.BooleanField(default = True) #c'est le directeur qui doit activer leur compte ou un super administrateur
@@ -82,23 +66,16 @@ class Eleve(models.Model):
     Nom = models.CharField(max_length = 50)
     Prenom = models.CharField(max_length = 50)
     Age = models.IntegerField()
-<<<<<<< HEAD
     Numero_Pere = models.CharField(max_length = 10, null = True, blank=True)
     Numero_Mere = models.CharField(max_length = 10, null = True, blank=True)
     Nom_Pere = models.CharField(max_length = 50, null = True, blank=True)
     Nom_Mere = models.CharField(max_length = 50, null = True, blank=True)
-=======
-    #Photo = models.ImageField(upload_to = 'Images/', default = 'Images/no-img.jpg')
-    Numero_Pere = models.CharField(max_length = 10, null = True)
-    Numero_Mere = models.CharField(max_length = 10, null = True)
-    Nom_Pere = models.CharField(max_length = 50, null = True)
-    Nom_Mere = models.CharField(max_length = 50, null = True)
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
     Classe = models.ForeignKey(Classe)
     Date_Inscription = models.DateField(auto_now = False, auto_now_add = True)
-
     def __str__(self):
         return self.Nom + " " + self.Prenom
+    def get_absolute_url(self):
+        return "/eleve/%i/" % self.id
 
 
 class Matiere(models.Model):

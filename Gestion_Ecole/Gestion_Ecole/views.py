@@ -1,13 +1,13 @@
-from Gestion_Ecole.forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm
 from django.urls import reverse
 from django.shortcuts import render_to_response, render, get_object_or_404
 from django.http.response import HttpResponseRedirect
-from .models import Directeur, Maitre, Personne, Classe
+from .models import Directeur, Maitre, Personne, Classe, Eleve
 from django.views import generic
 
 def login(request):
-    logged_user = get_logged_user_from_request(request)
-    if logged_user:
+    logged_user_name = get_logged_user_from_request(request)
+    if logged_user_name:
         return HttpResponseRedirect('/welcome')
     else:
         if request.method == "POST":
@@ -16,7 +16,7 @@ def login(request):
                 user_email = form.cleaned_data['email']
                 mot_de_passe = form.cleaned_data['mot_de_passe']
                 logged_user = Personne.objects.get(Email = user_email, Mot_De_Passe = mot_de_passe)
-                request.session['logged_user_id'] = logged_user.id
+                request.session['logged_user_name'] = logged_user.Nom
                 return HttpResponseRedirect('/welcome')
             else:
                 form = LoginForm()
@@ -27,42 +27,62 @@ def login(request):
             return render(request, 'Gestion_Ecole/login.html', {'form':form})
 
 def welcome(request):
-    logged_user = get_logged_user_from_request(request)
-    if logged_user:
+    logged_user_name = get_logged_user_from_request(request)
+    if logged_user_name:
         liste_classes = Classe.objects.order_by('id')
         return render(request, 'Gestion_Ecole/welcome.html',
-            {'logged_user' : logged_user, 'liste_classes' : liste_classes})
+            {'logged_user_name' : logged_user_name, 'liste_classes' : liste_classes})
     else:
         return HttpResponseRedirect('/login')
 
 def get_logged_user_from_request(request):
-    if 'logged_user_id' in request.session:
-        logged_user_id = request.session['logged_user_id']
-        if len(Directeur.objects.filter(id=logged_user_id)) == 1:
-            return Directeur.objects.get(id=logged_user_id)
+    if 'logged_user_name' in request.session:
+        logged_user_name = request.session['logged_user_name']
+        print logged_user_name
+        if len(Directeur.objects.filter(Nom=logged_user_name)) == 1:
+            print "2"
+            return logged_user_name
         else:
             return None
     else:
         return None
 
 def logout(request):
-    del request.session['logged_user_id']
+    del request.session['logged_user_name']
     return HttpResponseRedirect('/login')
 
-def eleve(request, classe_id):
+def classe(request, classe_id):
     classe_choisie = get_object_or_404(Classe, pk=classe_id)
     liste_classes = Classe.objects.order_by('id')
-    logged_user = Directeur.objects.get(id=request.session['logged_user_id'])
+    logged_user_name = request.session['logged_user_name']
     try:
-        liste_matieres = classe_choisie.matiere_set.all()
-        print liste_matieres
+        liste_eleves = classe_choisie.eleve_set.order_by("Nom")
         return render(request, 'Gestion_Ecole/classe.html',
             {
-            'logged_user' : logged_user,
-            'liste_matieres' : liste_matieres,
+            'logged_user_name' : logged_user_name,
+            'liste_eleves' : liste_eleves,
             'liste_classes' : liste_classes,
             'classe_choisie' : classe_choisie,
             })
     except:
         return render(request, 'Gestion_Ecole/welcome.html',
-            {'logged_user' : logged_user, 'liste_classes' : liste_classes})
+            {'logged_user_name' : logged_user_name, 'liste_classes' : liste_classes})
+
+def eleve(request, eleve_id):
+    eleve_choisi = get_object_or_404(Eleve, pk=eleve_id)
+    classe_choisie = Classe.objects.get(pk=eleve_choisi.Classe.id)
+    liste_classes = Classe.objects.order_by('id')
+    logged_user_name = request.session['logged_user_name']
+    try:
+        liste_matieres = classe_choisie.matiere_set.order_by("Nom")
+        return render(request, 'Gestion_Ecole/eleve.html',
+            {
+            'logged_user_name' : logged_user_name,
+            'liste_classes' : liste_classes,
+            'liste_matieres' : liste_matieres,
+            'eleve_choisi' : eleve_choisi,
+            'classe_choisie' : classe_choisie,
+            })
+    except:
+        return render(request, 'Gestion_Ecole/welcome.html',
+            {'logged_user_name' : logged_user_name, 'liste_classes' : liste_classes})

@@ -1,5 +1,5 @@
 
-from Gestion_Ecole.models import Directeur, Maitre, Personne
+from .models import Directeur, Maitre, Personne
 from django.forms.models import ModelForm
 from django import forms
 
@@ -15,10 +15,8 @@ class LoginForm(forms.Form):
 
         if email and mot_de_passe:
             result = Personne.objects.filter(Mot_De_Passe= mot_de_passe, Email = email)
-
             if(len(result) != 1):
                 raise forms.ValidationError("Adresse de courriel ou mot de passe errone(e).")
-
         return cleaned_data
 
 

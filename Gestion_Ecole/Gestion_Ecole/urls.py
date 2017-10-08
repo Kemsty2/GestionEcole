@@ -24,14 +24,9 @@ app_name = 'Gestion_Ecole'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.login, name='login'),
-    url(r'^login$', views.login, name='login'),
-<<<<<<< HEAD
-    url(r'^logout$', views.logout, name='logout'),
-    url(r'^welcome$', views.welcome, name='welcome'),
-    url(r'^classe/(?P<classe_id>[0-9]+)$', views.classe, name='classe'),
-=======
-    url(r'^welcome$', views.welcome, name='welcome'),
-    url(r'^classe/(?P<classe_id>[0-9]+)$', views.classe, name='classe'),
-    #url(r'^register$', registerMaitre),
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^welcome/$', views.welcome, name='welcome'),
+    url(r'^classe/(?P<classe_id>[0-9]+)/$', views.classe, name='classe'),
+    url(r'^eleve/(?P<eleve_id>[0-9]+)/$', views.eleve, name="eleve"),
 ]

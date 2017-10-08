@@ -1,27 +1,36 @@
-<<<<<<< HEAD
 {% extends "Gestion_Ecole/base_logged_in.html" %}
 
-{% block title %} {{ classe_choisie }} {% endblock %}
+{% block titlepage %} {{ classe_choisie }} {% endblock %}
 
 {% block content %}
-
 <div class="container">
-  <strong><h2>{{ classe_choisie }}</h2></strong>
-  {% for matiere in liste_matieres %}
-  <button type="button" class="btn btn-default btn-block">
-    {{ matiere }}
-  </button>
-  {% endfor %}
+  <h2>{{ classe_choisie }}</h2>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nom & Prenom</th>
+        <th>Seq. 1</th>
+        <th>Seq. 2</th>
+        <th>Seq. 3</th>
+        <th>Seq. 4</th>
+        <th>Seq. 5</th>
+        <th>Seq. 6</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for eleve in liste_eleves %}
+      <tr>
+        <td ><a href="{{ eleve.get_absolute_url }}">{{ eleve.Nom }} {{ eleve.Prenom }}</a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-=======
-{% extends "Gestion_Ecole/base_logged_in" %}
-
-{% block content %}
-<ul>
-{% for matiere in matieres %}
-  <li>{{ matiere }}</li>  
-{% endfor %}
-</ul>
-
->>>>>>> 09daf3b251842c1af719889730c976368ff1cb79
 {% endblock %}

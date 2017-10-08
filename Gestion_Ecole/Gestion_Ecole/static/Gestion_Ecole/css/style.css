@@ -1,4 +1,20 @@
 .jumbotron {
   color: white;
-  background-image: url('../img/bg.jpg');
+  background-color: #005DA5;
+}
+
+a{
+  color: #004172;
+}
+
+input.form-control, button.btn{
+  border-radius: 0px;
+}
+
+#search-btn{
+  border-left: white;
+}
+
+#search-input{
+  border-right: white;
 }
