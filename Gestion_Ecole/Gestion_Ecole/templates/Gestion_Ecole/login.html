@@ -7,21 +7,24 @@
 
 {% block content %}
 	<div class="container col-sm-4 col-sm-offset-4" id="loginContainer">
-	  {% if error %}
-	  <div class="alert alert-danger alert-dismissable">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-	    {{error}}
-	  </div>
-	  {% endif %}
-		<form action="/login/" method="post" class="form">
-		  {% csrf_token %}
-		  {% bootstrap_form form %}
-		  {% buttons %}
-		    <button type="submit" class="btn btn-primary">
-		      <span class="glyphicon glyphicon-ok"></span> Valider
-		    </button>
-		  {% endbuttons %}
-		</form>
+		<fieldset>
+			<legend><strong>Connexion</strong></legend>
+			{% if error %}
+			<div class="alert alert-danger alert-dismissable">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+				{{error}}
+			</div>
+			{% endif %}
+			<form action="/login/" method="post" class="form">
+				{% csrf_token %}
+				{% bootstrap_form form %}
+				{% buttons %}
+				<button type="submit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-ok"></span> Valider
+				</button>
+				{% endbuttons %}
+			</form>
+		</fieldset>
 	</div>
 
 	<script type="text/javascript">

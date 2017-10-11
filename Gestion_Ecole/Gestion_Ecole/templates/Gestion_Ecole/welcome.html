@@ -3,4 +3,25 @@
 {% block titlepage %}Accueil{% endblock %}
 
 {% block content %}
+<div class="container">
+  <ul class="breadcrumb">
+    <li class="active">Accueil</li>
+  </ul>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Classes</th>
+        <th>Effectif</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for classe in liste_classes %}
+      <tr>
+        <td><a href="{{ classe.get_absolute_url }}">{{ classe }}</a></td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

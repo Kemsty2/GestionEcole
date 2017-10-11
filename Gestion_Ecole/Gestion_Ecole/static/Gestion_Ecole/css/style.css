@@ -7,14 +7,17 @@ a{
   color: #004172;
 }
 
-input.form-control, button.btn{
+input.form-control, .btn{
+  border-radius: 0px;
+}
+
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
   border-radius: 0px;
 }
 
 #search-btn{
   border-left: white;
-}
-
-#search-input{
-  border-right: white;
 }

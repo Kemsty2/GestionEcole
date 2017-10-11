@@ -38,9 +38,7 @@ def welcome(request):
 def get_logged_user_from_request(request):
     if 'logged_user_name' in request.session:
         logged_user_name = request.session['logged_user_name']
-        print logged_user_name
         if len(Directeur.objects.filter(Nom=logged_user_name)) == 1:
-            print "2"
             return logged_user_name
         else:
             return None
@@ -69,11 +67,13 @@ def classe(request, classe_id):
             {'logged_user_name' : logged_user_name, 'liste_classes' : liste_classes})
 
 def eleve(request, eleve_id):
+
     eleve_choisi = get_object_or_404(Eleve, pk=eleve_id)
     classe_choisie = Classe.objects.get(pk=eleve_choisi.Classe.id)
     liste_classes = Classe.objects.order_by('id')
     logged_user_name = request.session['logged_user_name']
     try:
+        print request.POST
         liste_matieres = classe_choisie.matiere_set.order_by("Nom")
         return render(request, 'Gestion_Ecole/eleve.html',
             {

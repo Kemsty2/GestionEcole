@@ -1,5 +1,5 @@
 
-from .models import Directeur, Maitre, Personne
+from .models import Directeur, Maitre, Personne, Note
 from django.forms.models import ModelForm
 from django import forms
 
@@ -20,7 +20,8 @@ class LoginForm(forms.Form):
         return cleaned_data
 
 
+
 class RegisterForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model = Maitre
         exclude = ('Actif',)

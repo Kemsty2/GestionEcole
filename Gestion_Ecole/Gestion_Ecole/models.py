@@ -92,4 +92,4 @@ class Note(models.Model):
     Sequence = models.ForeignKey(Sequence)
 
     def __str__(self):
-        return self.Eleve.Nom + " " + self.Sequence.Nom
+        return self.Eleve.Nom + " - " + self.Matiere.Nom + " - "  + self.Sequence.Nom
